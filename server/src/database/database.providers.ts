@@ -12,8 +12,15 @@ export const databaseProviders = [
         host: 'dpg-d33hh4adbo4c73b80fu0-a.oregon-postgres.render.com',
         port: 5432,
         username: 'chatu_user',
-        password: process.env.DB_PASSWORD,
-        database: 'chatu'
+        password:  process.env.DB_PASSWORD,
+        database: 'chatu',
+        dialectOptions: {
+          ssl: {
+            require: true,
+            rejectUnauthorized: false
+          }
+        },
+        logging: false,
       });
       sequelize.addModels([User, Message, Channel]);
       await sequelize.sync();
