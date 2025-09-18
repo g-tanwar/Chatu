@@ -54,7 +54,8 @@ export class ChannelService {
     } catch {
       return {
         statusCode: '404',
-        message: 'User or channel not found.'
+        message: 'User or channel not found.', 
+        channels:[]
       };
     }
   }
