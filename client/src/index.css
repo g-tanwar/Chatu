@@ -25,3 +25,68 @@
   }
   
 }
+
+/* Animations and card styles for dark landing UI */
+@layer components{
+  @keyframes rise {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  @keyframes gradient-x {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .fade-in-up{
+    animation: rise .6s ease both;
+  }
+
+  .floaty{
+    animation: floaty 6s ease-in-out infinite;
+  }
+
+  .anim-delay-1{ animation-delay: .05s; }
+  .anim-delay-2{ animation-delay: .15s; }
+  .anim-delay-3{ animation-delay: .25s; }
+  .anim-delay-4{ animation-delay: .35s; }
+  .anim-delay-5{ animation-delay: .45s; }
+
+  .animated-card{
+    position: relative;
+    background-color: rgb(38,38,38);
+    border: 1px solid rgb(64,64,64);
+    border-radius: 0.5rem;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+
+  .animated-card:hover{
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 10px 30px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.04) inset;
+    border-color: rgb(82,82,82);
+  }
+
+  .animated-card::before{
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(59,130,246,.35), rgba(168,85,247,.35), rgba(236,72,153,.35));
+    background-size: 200% 200%;
+    filter: blur(8px);
+    opacity: 0;
+    transition: opacity .25s ease;
+    z-index: 0;
+    animation: gradient-x 6s ease infinite;
+  }
+
+  .animated-card:hover::before{ opacity: .6; }
+
+  .animated-card > *{ position: relative; z-index: 1; }
+}

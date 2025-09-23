@@ -21,13 +21,26 @@ const Sidebar = () => {
     useEffect(() => {
         setIsPending(true);
         const fetchChannels = async () => {
-            const result = await getChannelsByUser(user?.id!);
-            setChannels(result.channels);
-            setLastMessages(result.lastMessages);
-            setIsPending(false);
+            try {
+                const result = await getChannelsByUser(user?.id!);
+                setChannels(result.channels || []);
+                setLastMessages(result.lastMessages || []);
+            } catch (err) {
+                console.error('Failed to load channels:', err);
+                setChannels([]);
+                setLastMessages([]);
+            } finally {
+                setIsPending(false);
+            }
         };
 
-        fetchChannels();
+        if (user?.id) {
+            fetchChannels();
+        } else {
+            setChannels([]);
+            setLastMessages([]);
+            setIsPending(false);
+        }
     }, [user?.id, refresh]);
 
     return (

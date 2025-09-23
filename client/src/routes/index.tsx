@@ -10,12 +10,29 @@ import ProfileEdit from '../pages/ProfileEdit';
 import Register from '../pages/Register';
 import Edit from '../pages/Edit';
 import ProtectedRoute from './ProtectedRoute';
+import LandingLayout from '../components/layout/Landing';
+import LandingHome from '../pages/Landing/Home';
+import Features from '../pages/Landing/Features';
+import Pricing from '../pages/Landing/Pricing';
+import About from '../pages/Landing/About';
+import Contact from '../pages/Landing/Contact';
 
 const Index = () => {
     return (
         <Routes>
+            {/* Public landing routes */}
+            <Route element={<LandingLayout />}>
+                <Route path='/' element={<LandingHome />} />
+                <Route path='/landing' element={<LandingHome />} />
+                <Route path='/features' element={<Features />} />
+                <Route path='/pricing' element={<Pricing />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/contact' element={<Contact />} />
+            </Route>
+
+            {/* App routes (protected) */}
             <Route path='/' element={<ProtectedRoute/>}>
-                <Route path='/' element={<Home />} />
+                <Route path='/home' element={<Home />} />
                 <Route path='/profile' element={<Profile/>} />
                 <Route path='/profile/edit' element={<ProfileEdit/>} />
                 <Route path='/create' element={<Create />} />
