@@ -42,7 +42,7 @@ const Login = () => {
               </div>
             </>
             :
-            <FormSuccess message="Logged In" redirectTo="chat" />
+            <FormSuccess message="Logged In" redirectTo="/chat" />
         }
       </div>
     </div>

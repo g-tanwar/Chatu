@@ -44,7 +44,7 @@ const LoginForm: FC<Props> = ({ setIsFormOpen }) => {
         image
       }));
       return setTimeout(() => {
-        return navigate('/');
+        return navigate('/chat');
       }, 2000);
     }
 

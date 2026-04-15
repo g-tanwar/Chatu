@@ -36,6 +36,7 @@ const RegisterForm: FC<Props> = ({ setIsFormOpen }) => {
       setTimeout(() => {
         return navigate('/login');
       }, 2000);
+      return;
     }
 
     reset();
