@@ -29,15 +29,19 @@ const ProfileEdit = () => {
 
         const username = e.target.username.value;
         const about = e.target.about.value;
-        let statusCode: string;
-        let message: string;
+        let statusCode: string = '500';
+        let message: string = 'Something went wrong';
         
         if (!username) return;
         if (image) {
             const secureUrl = await uploadUserImage(image);
-            ({ statusCode, message } = await updateUser(user?.id!, { username, about, image: secureUrl }));
+            const res = await updateUser(user?.id!, { username, about, image: secureUrl });
+            statusCode = res.statusCode;
+            message = res.message;
         } else {
-            ({ statusCode, message } = await updateUser(user?.id!, { username, about }));
+            const res = await updateUser(user?.id!, { username, about });
+            statusCode = res.statusCode;
+            message = res.message;
         }
 
         if (statusCode === '200') {
