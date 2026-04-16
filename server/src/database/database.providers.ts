@@ -9,11 +9,11 @@ export const databaseProviders = [
     useFactory: async () => {
       const sequelize = new Sequelize({
         dialect: 'postgres',
-        host: 'dpg-d33hh4adbo4c73b80fu0-a.oregon-postgres.render.com',
+        host: 'dpg-d7gi3lnlk1mc73c58eeg-a.oregon-postgres.render.com',
         port: 5432,
-        username: 'chatu_user',
+        username: 'chatu_y3x4_user',
         password:  process.env.DB_PASSWORD,
-        database: 'chatu',
+        database: 'chatu_y3x4',
         dialectOptions: {
           ssl: {
             require: true,

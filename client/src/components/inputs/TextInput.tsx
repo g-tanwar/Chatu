@@ -20,6 +20,8 @@ const TextInput: FC<Props> = ({ label, placeholder, error, informations, refs, I
       <div className={`flex items-center border-b transition-all duration-100 ${error ? 'border-red-500' : 'border-neutral-500 focus-within:border-white'}`}>
         <Icon className='text-2xl text-white' />
         <input
+          id={label.toLowerCase()}
+          autoComplete={label.toLowerCase() === 'email' ? 'email' : 'username'}
           className='pl-3 text-white text-lg bg-transparent p-2 w-full outline-none placeholder-neutral-500'
           placeholder={placeholder}
           name={label.toLowerCase()}

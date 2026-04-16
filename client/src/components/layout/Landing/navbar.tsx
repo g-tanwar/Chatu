@@ -1,8 +1,7 @@
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import Logo from '../../../assets/logo.png'
 
 const Navbar = () => {
-  const location = useLocation()
   const navLinkClass = ({ isActive }: { isActive: boolean }) => `px-3 py-2 rounded-md text-sm md:text-base ${isActive ? 'bg-neutral-800 text-white' : 'text-neutral-300 hover:text-white hover:bg-neutral-800'} duration-150`
 
   return (

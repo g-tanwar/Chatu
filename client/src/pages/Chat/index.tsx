@@ -25,16 +25,16 @@ const Chat = () => {
   const ref = useChatScroll(messages);
 
   useEffect(() => {
-    if (!location.state.channelId) return;
+    if (!location.state?.channelId) return;
     setIsPending(true);
 
     const fetchChannel = async () => {
-      const result = await getChannel(location.state.channelId);
+      const result = await getChannel(location.state?.channelId);
       setChannel(result.channel);
     }
 
     const fetchMessages = async () => {
-      const result = await getMessagesByChannel(location.state.channelId);
+      const result = await getMessagesByChannel(location.state?.channelId);
       setMessages(result);
       setIsPending(false);
     };
@@ -43,7 +43,7 @@ const Chat = () => {
       fetchMessages();
       fetchChannel();
     }
-  }, [location.state.channelId, user?.id]);
+  }, [location.state?.channelId, user?.id]);
 
   useEffect(() => {
     socket.on('chat', (data) => {

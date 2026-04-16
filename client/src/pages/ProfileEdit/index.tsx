@@ -29,13 +29,15 @@ const ProfileEdit = () => {
 
         const username = e.target.username.value;
         const about = e.target.about.value;
+        let statusCode: string;
+        let message: string;
         
         if (!username) return;
         if (image) {
             const secureUrl = await uploadUserImage(image);
-            var { statusCode, message } = await updateUser(user?.id!, { username, about, image: secureUrl });
+            ({ statusCode, message } = await updateUser(user?.id!, { username, about, image: secureUrl }));
         } else {
-            var { statusCode, message } = await updateUser(user?.id!, { username, about });
+            ({ statusCode, message } = await updateUser(user?.id!, { username, about }));
         }
 
         if (statusCode === '200') {

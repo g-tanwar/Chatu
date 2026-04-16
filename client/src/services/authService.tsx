@@ -10,8 +10,8 @@ export const createAccount = async ({ email, username, password }: signFormType)
         });
 
         return data;
-    } catch {
-        return { statusCode: '409', message: 'User already exists.' };
+    } catch (error: any) {
+        return error.response?.data || { statusCode: '500', message: 'Something went wrong.' };
     }
 }
 
@@ -23,7 +23,7 @@ export const logIn = async ({ email, password }: signFormType) => {
         });
         return data;
 
-    } catch {
-        return { statusCode: '401', message: 'Wrong email or password.' }
+    } catch (error: any) {
+        return error.response?.data || { statusCode: '500', message: 'Something went wrong.' };
     }
 }
