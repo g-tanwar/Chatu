@@ -34,11 +34,16 @@ const ProfileEdit = () => {
         let message: string = 'Something went wrong';
         
         if (!username) return;
-        if (image) {
-            const secureUrl = await uploadUserImage(image);
-            const res = await updateUser(user?.id!, { username, about, image: secureUrl });
-            statusCode = res.statusCode;
-            message = res.message;
+        if (e.target.image.files.length === 1) {
+            try {
+                const secureUrl = await uploadUserImage(e.target.image.files[0]);
+                const res = await updateUser(user?.id!, { username, about, image: secureUrl });
+                statusCode = res.statusCode;
+                message = res.message;
+            } catch (err: any) {
+                statusCode = '500';
+                message = 'Failed to upload image. Please try a smaller file.';
+            }
         } else {
             const res = await updateUser(user?.id!, { username, about });
             statusCode = res.statusCode;
@@ -88,7 +93,7 @@ const ProfileEdit = () => {
             <PageInfo isChannel={false} name='Edit Profile' />
             <div className="flex-1 overflow-y-auto p-4 flex justify-center items-start md:pt-10 pt-4 scrollbar-hide">
                 <form 
-                    className='w-full max-w-lg bg-neutral-800/80 border border-neutral-700/50 rounded-2xl shadow-xl flex flex-col items-center p-8' 
+                    className='w-full max-w-lg bg-white/50 dark:bg-black/20 border border-black/5 dark:border-white/5 rounded-3xl shadow-xl flex flex-col items-center p-8 transition-colors duration-300' 
                     onSubmit={handleSubmit} 
                     action='POST'
                 >
@@ -113,27 +118,27 @@ const ProfileEdit = () => {
                         <input onChange={handleChange} ref={inputRef} type="file" name="image" hidden accept='image/png, image/jpeg' />
                     </div>
 
-                    <div className='w-full flex flex-col gap-5'>
-                        <div className="flex flex-col gap-2">
-                            <label className='text-sm font-medium text-neutral-400' htmlFor="username">Username</label>
+                    <div className='w-full flex flex-col gap-6 mt-2'>
+                        <div className="flex flex-col">
+                            <label className='text-sm font-semibold text-neutral-600 dark:text-neutral-400 mb-1.5 ml-1' htmlFor="username">Username</label>
                             <input
                                 minLength={5}
                                 maxLength={20}
                                 placeholder='Your distinct username'
-                                className='bg-neutral-900/50 border border-neutral-700 text-white outline-none rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300'
+                                className='bg-white/50 dark:bg-black/20 border border-black/10 dark:border-white/5 text-neutral-800 dark:text-neutral-100 outline-none rounded-xl p-3 focus:ring-2 focus:ring-indigo-500/50 focus:border-transparent transition-all shadow-inner'
                                 type="text"
                                 name='username'
                                 defaultValue={details?.username}
                             />
                         </div>
                         
-                        <div className="flex flex-col gap-2">
-                            <label className='text-sm font-medium text-neutral-400' htmlFor="about">About</label>
+                        <div className="flex flex-col">
+                            <label className='text-sm font-semibold text-neutral-600 dark:text-neutral-400 mb-1.5 ml-1' htmlFor="about">About</label>
                             <textarea
                                 spellCheck={false}
                                 maxLength={250}
                                 placeholder='A little something about yourself...'
-                                className='bg-neutral-900/50 border border-neutral-700 text-white outline-none rounded-lg p-3 resize-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-300 h-32'
+                                className='bg-white/50 dark:bg-black/20 border border-black/10 dark:border-white/5 text-neutral-800 dark:text-neutral-100 outline-none rounded-xl p-3 resize-none focus:ring-2 focus:ring-indigo-500/50 focus:border-transparent transition-all shadow-inner h-32'
                                 name="about"
                                 defaultValue={details?.about}
                             ></textarea>

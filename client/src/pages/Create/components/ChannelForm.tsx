@@ -84,20 +84,20 @@ const ChannelForm = () => {
 
     return (
         <form action='POST' className='max-w-[800px] px-3 mx-auto overflow-y-auto overflow-x-hidden' onSubmit={handleSubmit}>
-            <div className='flex items-center justify-center w-full lg:flex-row flex-col py-5 border-b border-neutral-600'>
+            <div className='flex items-center justify-center w-full lg:flex-row flex-col py-8 border-b border-black/5 dark:border-white/5 transition-colors duration-300'>
                 <LazyLoadImage
-                    className={`rounded-full w-52 h-52 object-cover cursor-pointer duration-200 ${!image && 'border-2 border-neutral-600 hover:bg-neutral-700'}`}
+                    className={`rounded-full w-48 h-48 lg:w-52 lg:h-52 object-cover cursor-pointer hover:shadow-lg transition-all duration-300 ${!image ? 'border-2 border-dashed border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 bg-black/5 dark:bg-black/20' : ''}`}
                     src={image}
                     alt='ch'
                     onClick={handleClick}
                 />
                 <input onChange={handleChange} ref={inputRef} type="file" hidden name="image" accept='image/png, image/jpeg' />
-                <div className='md:pl-3 lg:pl-5 md:w-[350px]'>
-                    <div className='flex flex-col mb-3'>
-                        <label htmlFor="name">Name</label>
+                <div className='md:pl-6 lg:pl-10 md:w-[400px] mt-6 lg:mt-0 w-full'>
+                    <div className='flex flex-col mb-5'>
+                        <label htmlFor="name" className="text-sm font-semibold text-neutral-600 dark:text-neutral-400 mb-1.5 ml-1">Channel Name</label>
                         <input
-                            className='bg-neutral-700 rounded-md p-2 outline-none'
-                            placeholder='Channel Name'
+                            className='bg-white/50 dark:bg-black/20 border border-black/10 dark:border-white/5 text-neutral-800 dark:text-neutral-100 rounded-xl p-3 outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-inner'
+                            placeholder='e.g. Engineering Team'
                             maxLength={50}
                             type="text"
                             name='name'
@@ -105,11 +105,11 @@ const ChannelForm = () => {
                         />
                     </div>
                     <div className='flex flex-col'>
-                        <label htmlFor="description">Description</label>
+                        <label htmlFor="description" className="text-sm font-semibold text-neutral-600 dark:text-neutral-400 mb-1.5 ml-1">Description</label>
                         <textarea
                             name='description'
-                            placeholder='Channel Description'
-                            className='bg-neutral-700 p-2 resize-none rounded-md outline-none'
+                            placeholder='What is this channel about?'
+                            className='bg-white/50 dark:bg-black/20 border border-black/10 dark:border-white/5 text-neutral-800 dark:text-neutral-100 p-3 resize-none rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-inner'
                             maxLength={255}
                             cols={20}
                             rows={5}

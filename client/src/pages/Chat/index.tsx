@@ -13,6 +13,7 @@ import { getMessagesByChannel } from '../../services/messageService';
 import ChatInput from './components/ChatInput';
 import Message from './components/Message';
 import { setRefresh } from '../../redux/features/channelSlice';
+import { HiUser } from 'react-icons/hi';
 
 const Chat = () => {
   const user = useSelector((state: RootState) => state.auth.user);
@@ -22,6 +23,7 @@ const Chat = () => {
   const [channel, setChannel] = useState<Channel>();
   const [messages, setMessages] = useState<Message[]>();
   const [isPending, setIsPending] = useState<boolean>(false);
+  const [isBotTyping, setIsBotTyping] = useState<boolean>(false);
   const ref = useChatScroll(messages);
 
   useEffect(() => {
@@ -48,6 +50,7 @@ const Chat = () => {
   useEffect(() => {
     socket.on('chat', (data) => {
       if (data.channelId === channel?.id) setMessages((prev: any) => [...prev, data]);
+      setIsBotTyping(false);
       dispatch(setRefresh());
     });
 
@@ -96,12 +99,29 @@ const Chat = () => {
                 return <Message key={index} message={message} />
               })
               :
-              <p className='bg-cyan-600 p-3 m-2 rounded-md text-center'>There is no any messages yet.</p>
+              <p className='bg-neutral-800/80 border border-neutral-700/50 p-4 m-4 rounded-xl text-center text-sm text-neutral-400 shadow-inner'>Send a message to start chatting.</p>
             :
             <Spinner size='lg' />
         }
+        {isBotTyping && (
+          <div className="flex w-full mb-6 justify-start fade-in-up">
+            <div className="flex-shrink-0 mr-3 mt-auto mb-5">
+              <div className="w-8 h-8 rounded-full bg-neutral-700 border border-neutral-600 flex items-center justify-center text-neutral-400 shadow-sm">
+                <HiUser className="text-xl" />
+              </div>
+            </div>
+            <div className="relative group max-w-[75%] flex flex-col items-start">
+              <div className="flex items-center gap-1.5 px-4 py-4 shadow-md border bg-neutral-800 rounded-2xl rounded-bl-sm border-neutral-700/50">
+                <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              </div>
+              <span className="text-[11px] text-neutral-500 mt-1.5 mx-1 font-medium">Bot is typing...</span>
+            </div>
+          </div>
+        )}
       </div>
-      <ChatInput channelId={channel?.id!} setMessages={setMessages} />
+      <ChatInput channelId={channel?.id!} setMessages={setMessages} setIsBotTyping={setIsBotTyping} />
     </section>
   )
 }

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { IoPersonAddSharp } from 'react-icons/io5';
 import { MdAddToPhotos } from 'react-icons/md';
+import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs';
 
 import { RootState } from '../../../redux/store'
 import { logOut } from '../../../redux/features/authSlice';
@@ -19,6 +20,14 @@ const UserBox = () => {
   const user = useSelector((state: RootState) => state.auth.user);
   const [loggedUser, setLoggedUser] = useState<User>();
   const [error, setError] = useState<string>('');
+  const [isDark, setIsDark] = useState(document.documentElement.classList.contains('dark'));
+
+  const toggleTheme = () => {
+    document.documentElement.classList.toggle('dark');
+    const currentlyDark = document.documentElement.classList.contains('dark');
+    setIsDark(currentlyDark);
+    localStorage.setItem('theme', currentlyDark ? 'dark' : 'light');
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -72,7 +81,14 @@ const UserBox = () => {
             Friends
           </button>
           <button
-            className='w-full hover:bg-neutral-700 duration-200 p-3 px-8 flex items-center'
+            className='w-full hover:bg-neutral-600 dark:hover:bg-neutral-700 duration-200 p-3 px-8 flex items-center'
+            onClick={toggleTheme}
+          >
+            {isDark ? <BsFillSunFill className='mr-3' /> : <BsFillMoonFill className='mr-3' />}
+            {isDark ? 'Light Mode' : 'Dark Mode'}
+          </button>
+          <button
+            className='w-full hover:bg-neutral-600 dark:hover:bg-neutral-700 duration-200 p-3 px-8 flex items-center'
             onClick={() => dispatch(logOut())}
           >
             <FiLogOut className='mr-3' />

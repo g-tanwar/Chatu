@@ -69,7 +69,7 @@ const UserBar: FC<Props> = ({ user, userId, isAdded, participants, setParticipan
     return (
         <div
             className={`
-                w-full items-center bg-neutral-700 rounded-md p-3 my-3
+                w-full items-center bg-white dark:bg-neutral-800/80 border border-black/5 dark:border-white/5 shadow-sm rounded-xl p-3 my-3 transition-colors duration-300
                 ${(search && !isAdded) ? (participant?.username?.toLowerCase().includes(search.toLowerCase()) ? 'flex' : 'hidden') : 'flex'}
             `}
         >
@@ -79,12 +79,12 @@ const UserBar: FC<Props> = ({ user, userId, isAdded, participants, setParticipan
                 className='w-12 h-12 rounded-full'
                 effect='blur'
             />
-            <p className='ml-2 font-semibold'>{participant?.username}</p>
-            <div className='ml-auto'>
+            <p className='ml-3 font-semibold text-neutral-800 dark:text-neutral-200'>{participant?.username}</p>
+            <div className='ml-auto flex items-center gap-1'>
                 <button
                     onClick={handleClick}
                     type='button'
-                    className='bg-neutral-700 text-3xl hover:bg-neutral-600 p-2 rounded-md text-white'
+                    className='text-3xl text-neutral-400 hover:text-indigo-600 dark:hover:text-white p-1 rounded-md transition-colors duration-200'
                 >
                     {
                         isAdded
@@ -100,7 +100,9 @@ const UserBar: FC<Props> = ({ user, userId, isAdded, participants, setParticipan
                     <button
                         onClick={handleAddAdmin}
                         type='button'
-                        className='bg-neutral-700 text-3xl hover:bg-neutral-600 p-2 rounded-md text-white'
+                        className={`text-3xl p-1 rounded-md transition-colors duration-200
+                            ${currentUser?.id === user ? 'text-neutral-300 dark:text-neutral-700 cursor-not-allowed' : 'text-amber-400 hover:text-amber-500'}
+                        `}
                         disabled={currentUser?.id === user}
                     >
                         {

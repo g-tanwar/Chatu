@@ -29,13 +29,13 @@ const Participants: FC<Props> = ({ participants, setParticipants, admins, setAdm
     return (
         <div className="w-full py-5 flex justify-center">
             <div className="py-3 grid grid-cols-1 lg:grid-cols-2 gap-3">
-                <div className="w-full">
-                    <p className="text-xl font-semibold">Friends</p>
-                    <div className="py-3">
+                <div className="w-full pr-0 lg:pr-6">
+                    <p className="text-xl font-bold tracking-tight text-neutral-800 dark:text-neutral-100">Friends</p>
+                    <div className="py-4">
                         <input
                             onChange={(e: any) => setSearch(e.target.value)}
                             type="text"
-                            className="border-neutral-900 outline-none w-full rounded-md bg-neutral-700 py-3 px-2"
+                            className="bg-white/50 dark:bg-black/20 border border-black/10 dark:border-white/5 text-neutral-800 dark:text-neutral-100 outline-none w-full rounded-xl py-3 px-4 focus:ring-2 focus:ring-indigo-500/50 transition-all shadow-inner"
                             placeholder="Search a friend..."
                         />
                     </div>
@@ -61,8 +61,8 @@ const Participants: FC<Props> = ({ participants, setParticipants, admins, setAdm
                         }
                     </div>
                 </div>
-                <div className="md:w-[400px]">
-                    <p className="text-xl font-semibold mb-2">Participants  ({participants.length})</p>
+                <div className="md:w-[400px] mt-6 lg:mt-0">
+                    <p className="text-xl font-bold tracking-tight text-neutral-800 dark:text-neutral-100 mb-4">Participants ({participants.length})</p>
                     {
                         participants
                         &&

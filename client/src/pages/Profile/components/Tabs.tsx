@@ -41,7 +41,7 @@ const Tabs: FC<Props> = ({ profileId }) => {
                     onClick={handleClickFriends}
                     className={`
                         text-xl py-3 cursor-pointer w-full text-center duration-200 transition-all border-b 
-                        ${tab === 'friends' ? 'border-b-2 font-semibold' : 'hover:border-white border-neutral-700'}
+                        ${tab === 'friends' ? 'border-b-2 border-indigo-600 dark:border-indigo-400 text-indigo-600 dark:text-indigo-400 font-bold' : 'border-black/5 dark:border-white/5 hover:border-black/20 dark:hover:border-white/20 text-neutral-600 dark:text-neutral-400'}
                     `}
                 >
                     Friends
@@ -54,7 +54,7 @@ const Tabs: FC<Props> = ({ profileId }) => {
                             onClick={handleClickRequests}
                             className={`
                                 text-xl py-3 cursor-pointer w-full text-center duration-200 transition-all border-b 
-                                ${tab === 'requests' ? 'border-b-2 font-semibold' : 'hover:border-white border-neutral-700'}
+                                ${tab === 'requests' ? 'border-b-2 border-indigo-600 dark:border-indigo-400 text-indigo-600 dark:text-indigo-400 font-bold' : 'border-black/5 dark:border-white/5 hover:border-black/20 dark:hover:border-white/20 text-neutral-600 dark:text-neutral-400'}
                             `}
                         >
                             Requests
@@ -63,7 +63,7 @@ const Tabs: FC<Props> = ({ profileId }) => {
                             onClick={handleClickBlock}
                             className={`
                                 text-xl py-3 cursor-pointer w-full text-center duration-200 transition-all border-b 
-                                ${tab === 'blocked' ? 'border-b-2 font-semibold' : 'hover:border-white border-neutral-700'}
+                                ${tab === 'blocked' ? 'border-b-2 border-indigo-600 dark:border-indigo-400 text-indigo-600 dark:text-indigo-400 font-bold' : 'border-black/5 dark:border-white/5 hover:border-black/20 dark:hover:border-white/20 text-neutral-600 dark:text-neutral-400'}
                             `}
                         >
                             Blocked

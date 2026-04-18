@@ -11,9 +11,10 @@ import { uploadImages } from '../../../services/userService';
 type Props = {
     channelId: string;
     setMessages: Dispatch<SetStateAction<any>>;
+    setIsBotTyping?: Dispatch<SetStateAction<boolean>>;
 }
 
-const ChatInput: FC<Props> = ({ channelId, setMessages }) => {
+const ChatInput: FC<Props> = ({ channelId, setMessages, setIsBotTyping }) => {
     const user = useSelector((state: RootState) => state.auth.user);
     const [images, setImages] = useState<any[] | null>(null);
     const [isPending, setIsPending] = useState<boolean>(false);
@@ -37,6 +38,10 @@ const ChatInput: FC<Props> = ({ channelId, setMessages }) => {
 
         setImages(null);
         socket.emit('chat', message);
+        if(setIsBotTyping) {
+            setIsBotTyping(true);
+            setTimeout(() => setIsBotTyping(false), 15000); // Fail-safe reset
+        }
         e.target.chat.value = '';
         setIsPending(false);
     };
@@ -51,7 +56,7 @@ const ChatInput: FC<Props> = ({ channelId, setMessages }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} method="POST" className='w-full bg-neutral-900 px-4 py-3 shrink-0 border-t border-neutral-800 transition-colors duration-300'>
+        <form onSubmit={handleSubmit} method="POST" className='w-full bg-white/70 dark:bg-black/20 backdrop-blur-md px-2 py-3 pb-safe md:px-4 md:py-4 shrink-0 border-t border-black/5 dark:border-black/50 transition-colors duration-300'>
             {
                 images && images.length > 0 &&
                 <div className='pb-3 flex flex-wrap gap-2 items-center'>
@@ -65,7 +70,8 @@ const ChatInput: FC<Props> = ({ channelId, setMessages }) => {
                     }
                 </div>
             }
-            <div className='flex items-center bg-neutral-800 border border-neutral-700/50 rounded-full px-4 py-2 gap-3 shadow-inner'>
+            {/* Input Container */}
+            <div className='flex items-center bg-white/50 dark:bg-neutral-800/80 border border-black/5 dark:border-neutral-700/50 rounded-full px-4 py-2 gap-2 shadow-inner focus-within:ring-2 focus-within:ring-indigo-500/50 focus-within:border-indigo-500 transition-all duration-300'>
                 <input
                     ref={uploadInputRef}
                     type="file"
@@ -74,19 +80,31 @@ const ChatInput: FC<Props> = ({ channelId, setMessages }) => {
                     hidden
                     accept='image/png, image/jpeg'
                 />
-                <button type='button' onClick={handleUploadImage} className="text-neutral-400 hover:text-indigo-400 transition-colors p-2 rounded-full hover:bg-neutral-700/50">
+                <button 
+                    type='button' 
+                    onClick={handleUploadImage} 
+                    className="text-neutral-400 hover:text-indigo-400 transition-colors p-2 rounded-full hover:bg-neutral-700 flex items-center justify-center"
+                >
                     <ImAttachment className='text-xl' />
                 </button>
+                
                 <input
                     readOnly={isPending}
                     spellCheck='false'
                     type="text"
                     name='chat'
                     placeholder="Type your message..."
-                    className="flex-1 bg-transparent text-white outline-none placeholder-neutral-500 py-1"
+                    className="flex-1 bg-transparent text-neutral-800 dark:text-white outline-none placeholder-neutral-500 py-2.5 px-2 text-sm md:text-base"
                 />
-                <button type='submit' className="text-indigo-500 hover:text-indigo-400 transition-colors p-2 rounded-full hover:bg-neutral-700/50 active:scale-95">
-                    <IoMdSend className='text-2xl' />
+                
+                <button 
+                    type='submit' 
+                    disabled={isPending}
+                    className={`transition-all p-2 rounded-full flex items-center justify-center active:scale-95
+                        ${isPending ? 'text-neutral-600 bg-transparent' : 'text-white bg-indigo-600 hover:bg-indigo-500 shadow-md'}
+                    `}
+                >
+                    <IoMdSend className='text-xl ml-1' />
                 </button>
             </div>
         </form>

@@ -45,7 +45,7 @@ const Sidebar = () => {
 
     return (
         <aside className={
-            `bg-neutral-900 border-r border-neutral-800 w-full md:w-80 lg:w-96 flex-shrink-0 flex flex-col h-full overflow-hidden transition-all duration-300
+            `bg-white/60 dark:bg-black/20 backdrop-blur-md border-r border-black/5 dark:border-white/5 w-full md:w-80 lg:w-96 flex-shrink-0 flex flex-col h-full overflow-hidden transition-all duration-300
                 ${location.pathname === '/' ? 'block' : 'hidden md:flex'} 
             `}
         >

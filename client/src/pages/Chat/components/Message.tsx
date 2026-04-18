@@ -76,10 +76,10 @@ const Message: FC<Props> = ({ message }) => {
 
                 {/* Chat Bubble Base */}
                 <div className={`
-                    flex flex-col px-4 py-3 shadow-md border
+                    flex flex-col px-4 py-3 shadow-md border transition-colors duration-300
                     ${isMine 
                         ? 'bg-indigo-600 text-white rounded-2xl rounded-br-sm border-indigo-500/50' 
-                        : 'bg-neutral-800 text-neutral-100 rounded-2xl rounded-bl-sm border-neutral-700/50'
+                        : 'bg-white dark:bg-neutral-800 text-neutral-800 dark:text-neutral-100 rounded-2xl rounded-bl-sm border-black/5 dark:border-neutral-700/50'
                     }
                 `}>
                     {/* Attached Images */}
@@ -98,7 +98,7 @@ const Message: FC<Props> = ({ message }) => {
                     )}
                     
                     {/* Message Body */}
-                    <p className={`text-[15px] leading-relaxed break-words ${isDeleted ? 'italic text-white/50 opacity-80' : ''}`}>
+                    <p className={`text-[15px] leading-relaxed break-words ${isDeleted ? 'italic opacity-60' : ''}`}>
                         {isDeleted ? 'This message has been deleted.' : message.text}
                     </p>
                 </div>
