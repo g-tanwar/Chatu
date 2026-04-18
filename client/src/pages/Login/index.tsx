@@ -1,9 +1,7 @@
 import Cookies from "js-cookie";
 import { useState } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-
-import Logo from '../../assets/brand-logo.png';
+import { HiChatAlt2 } from "react-icons/hi";
 import FormSuccess from "../../components/loading/FormSuccess";
 import Divider from "../Register/components/Divider";
 import LoginForm from "./components/LoginForm";
@@ -26,12 +24,11 @@ const Login = () => {
                   <Relogin id={lastUser} setIsFormOpen={setIsFormOpen} setLastId={setLastUser} />
                   :
                   <div>
-                    <LazyLoadImage
-                      className='w-[80%] mx-auto border-b border-neutral-700 hidden sm:block'
-                      src={Logo}
-                      alt='logo'
-                      effect='blur'
-                    />
+                    <div className='w-full border-b border-neutral-700 hidden sm:flex justify-center pb-8'>
+                      <div className="w-20 h-20 rounded-2xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                        <HiChatAlt2 className="text-white text-4xl" />
+                      </div>
+                    </div>
                     <h1 className='text-3xl font-semibold text-center sm:hidden mb-10'>Login</h1>
                     <LoginForm setIsFormOpen={setIsFormOpen} />
                   </div>

@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
-import Brand from '../../assets/brand-logo.png'
 import { HiChatAlt2, HiUserGroup, HiOutlineShieldCheck, HiLightningBolt } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
@@ -38,8 +36,10 @@ const LandingHome = () => {
         {/* Floating Brand Graphic */}
         <div className="hidden md:flex justify-end transition-opacity duration-300 fade-in-up anim-delay-2 pl-8">
           <div className="relative">
-             <div className="absolute inset-0 bg-indigo-500/20 dark:bg-indigo-500/40 blur-3xl rounded-full"></div>
-             <LazyLoadImage src={Brand} alt="Brand" effect="blur" className="max-w-[280px] lg:max-w-[360px] relative z-10 floaty drop-shadow-2xl" />
+             <div className="absolute inset-0 bg-indigo-500/20 dark:bg-indigo-500/40 blur-3xl rounded-full scale-150"></div>
+             <div className="w-48 h-48 lg:w-64 lg:h-64 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center relative z-10 floaty drop-shadow-2xl shadow-indigo-500/50">
+               <HiChatAlt2 className="text-white text-6xl lg:text-8xl" />
+             </div>
           </div>
         </div>
       </div>
