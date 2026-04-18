@@ -64,7 +64,7 @@ const ChannelBox: FC<Props> = ({ channel, userId, lastMessage, search }) => {
     <div
       onClick={handleClickChannel}
       className={`
-            w-full items-center p-3 border-b border-neutral-700 hover:bg-neutral-800 duration-200 cursor-pointer
+            w-full items-center p-3 border-b border-black/5 dark:border-white/5 hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 cursor-pointer
             ${search
                 ?
                 (
@@ -87,10 +87,10 @@ const ChannelBox: FC<Props> = ({ channel, userId, lastMessage, search }) => {
               alt="user-pp"
             />
             <div className='ml-3'>
-              <h5 className='font-semibold w-32 sm:w-64 md:w-40 lg:w-52 xl:w-56 h-5 overflow-hidden'>
+              <h5 className='font-semibold w-32 sm:w-64 md:w-40 lg:w-52 xl:w-56 h-5 overflow-hidden text-neutral-800 dark:text-neutral-100'>
                 {otherUser?.username}
               </h5>
-              <p className='text-neutral-400 mt-1 text-sm w-32 sm:w-64 md:w-40 lg:w-52 xl:w-56 h-5 overflow-hidden'>
+              <p className='text-neutral-500 dark:text-neutral-400 mt-1 text-sm w-32 sm:w-64 md:w-40 lg:w-52 xl:w-56 h-5 overflow-hidden'>
                 {lastMessage
                   ?
                   (
@@ -114,10 +114,10 @@ const ChannelBox: FC<Props> = ({ channel, userId, lastMessage, search }) => {
               alt="group-pp"
             />
             <div className='ml-3'>
-              <h5 className='font-semibold w-32 sm:w-64 md:w-40 lg:w-52 xl:w-56 h-5 overflow-hidden'>
+              <h5 className='font-semibold w-32 sm:w-64 md:w-40 lg:w-52 xl:w-56 h-5 overflow-hidden text-neutral-800 dark:text-neutral-100'>
                 {channel.name}
               </h5>
-              <p className='text-neutral-400 text-sm w-32 sm:w-64 md:w-40 lg:w-52 xl:w-56 h-5 overflow-hidden'>
+              <p className='text-neutral-500 dark:text-neutral-400 mt-1 text-sm w-32 sm:w-64 md:w-40 lg:w-52 xl:w-56 h-5 overflow-hidden'>
                 {lastMessage?.text
                   ?
                   (
@@ -134,7 +134,7 @@ const ChannelBox: FC<Props> = ({ channel, userId, lastMessage, search }) => {
           </>
       }
       <div className='ml-auto h-full'>
-        <p className='text-neutral-400 mb-1'>
+        <p className='text-neutral-500 dark:text-neutral-400 text-sm mb-1'>
           {
             moment(lastMessage?.createdAt).isSame(Date.now(), 'day')
               ?

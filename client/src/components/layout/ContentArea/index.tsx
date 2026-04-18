@@ -10,7 +10,9 @@ const ContentArea: FC<Props> = ({ children }) => {
 
     return (
         <main className={`flex-1 h-full flex-col bg-transparent relative overflow-hidden ${location.pathname === '/' ? 'hidden md:flex' : 'flex'}`}>
-            {children}
+            <div key={location.pathname} className="h-full w-full flex flex-col flex-1 animate-fade-in relative z-10">
+                {children}
+            </div>
         </main>
     )
 }
