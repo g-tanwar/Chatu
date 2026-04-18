@@ -45,13 +45,13 @@ const Sidebar = () => {
 
     return (
         <aside className={
-            `bg-neutral-900 border-r md:block border-neutral-700 xl:col-span-2 md:col-span-2 min-h-screen md:min-h-fit overflow-hidden  
-                ${location.pathname === '/' ? 'block' : 'hidden'} 
+            `bg-neutral-900 border-r border-neutral-800 w-full md:w-80 lg:w-96 flex-shrink-0 flex flex-col h-full overflow-hidden transition-all duration-300
+                ${location.pathname === '/' ? 'block' : 'hidden md:flex'} 
             `}
         >
             <UserBox />
             <Searchbar setSearch={setSearch} />
-            <div className='overflow-x-hidden overflow-y-auto max-h-[865px] pb-16'>
+            <div className='flex-1 overflow-x-hidden overflow-y-auto scrollbar-hide pb-4'>
                 {
                     isPending
                         ?

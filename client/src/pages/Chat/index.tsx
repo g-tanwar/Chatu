@@ -58,7 +58,7 @@ const Chat = () => {
   }, [channel?.id, dispatch]);
 
   return (
-    <section className='h-full relative overflow-hidden'>
+    <section className='h-full flex flex-col overflow-hidden'>
       <PageInfo
         isChannel={true}
         name={
@@ -86,7 +86,7 @@ const Chat = () => {
             )
         }
       />
-      <div ref={ref} className='flex flex-col overflow-x-hidden overflow-y-auto pb-10 h-[85%] scroll-smooth'>
+      <div ref={ref} className='flex-1 overflow-y-auto p-4 scroll-smooth scrollbar-hide'>
         {
           !isPending
             ?

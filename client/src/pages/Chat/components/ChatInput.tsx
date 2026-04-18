@@ -51,20 +51,21 @@ const ChatInput: FC<Props> = ({ channelId, setMessages }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} method="POST" className='w-full mt-auto bg-neutral-900 p-3 sticky bottom-0 border-t border-neutral-700'>
+        <form onSubmit={handleSubmit} method="POST" className='w-full bg-neutral-900 px-4 py-3 shrink-0 border-t border-neutral-800 transition-colors duration-300'>
             {
-                images
-                &&
-                <div className='pb-3 flex items-center'>
-                    <GiCancel onClick={() => setImages(null)} className='mx-4 cursor-pointer' />
+                images && images.length > 0 &&
+                <div className='pb-3 flex flex-wrap gap-2 items-center'>
+                    <button type="button" onClick={() => setImages(null)} className='text-rose-400 hover:text-rose-300 mr-2 flex items-center gap-1 text-sm bg-neutral-800 px-3 py-1 rounded-full border border-neutral-700/50'>
+                        <GiCancel /> Clear
+                    </button>
                     {
-                        Array.from({ length: images!.length }, (x, i) => i).map((index) => {
-                            return <span className='mx-2' key={index}>{images![index].name}</span>
-                        })
+                        Array.from({ length: images.length }, (_, i) => (
+                            <span className='bg-indigo-900/40 border border-indigo-500/30 text-indigo-200 text-xs px-3 py-1 rounded-full' key={i}>{images[i].name}</span>
+                        ))
                     }
                 </div>
             }
-            <div className='flex justify-around items-center'>
+            <div className='flex items-center bg-neutral-800 border border-neutral-700/50 rounded-full px-4 py-2 gap-3 shadow-inner'>
                 <input
                     ref={uploadInputRef}
                     type="file"
@@ -73,18 +74,19 @@ const ChatInput: FC<Props> = ({ channelId, setMessages }) => {
                     hidden
                     accept='image/png, image/jpeg'
                 />
-                <button type='button' onClick={handleUploadImage}>
-                    <ImAttachment className='text-2xl hover:text-neutral-300 duration-200' />
+                <button type='button' onClick={handleUploadImage} className="text-neutral-400 hover:text-indigo-400 transition-colors p-2 rounded-full hover:bg-neutral-700/50">
+                    <ImAttachment className='text-xl' />
                 </button>
                 <input
                     readOnly={isPending}
                     spellCheck='false'
                     type="text"
                     name='chat'
-                    className="bg-neutral-800 rounded-lg w-[90%] h-10 outline-none p-2"
+                    placeholder="Type your message..."
+                    className="flex-1 bg-transparent text-white outline-none placeholder-neutral-500 py-1"
                 />
-                <button type='submit'>
-                    <IoMdSend className='text-2xl hover:text-neutral-300 duration-200' />
+                <button type='submit' className="text-indigo-500 hover:text-indigo-400 transition-colors p-2 rounded-full hover:bg-neutral-700/50 active:scale-95">
+                    <IoMdSend className='text-2xl' />
                 </button>
             </div>
         </form>

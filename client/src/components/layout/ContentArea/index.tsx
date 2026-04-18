@@ -6,9 +6,9 @@ type Props = {
 
 const ContentArea: FC<Props> = ({ children }) => {
     return (
-        <div className="xl:col-span-5 md:col-span-3 h-full overflow-y-auto">
+        <main className="flex-1 h-full flex flex-col bg-neutral-900 relative overflow-hidden">
             {children}
-        </div>
+        </main>
     )
 }
 
